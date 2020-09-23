@@ -6,8 +6,8 @@ const entrySchema = new mongoose.Schema({
 		required: true,
 	},
 	entries: {
-        type : String,
-        default : ''
+        type : Array,
+        default : []
     },
     comments : [{type:mongoose.Schema.Types.ObjectId, ref : 'Comment'}],
 	supplierId: {
