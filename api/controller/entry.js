@@ -11,76 +11,89 @@ const types = require('../utils/types')
 // @Request = GET
 exports.get_all_entries = (req, res) => {
 
-    const userType = req.userData.type
-    switch(userType) {
-        case types.USER:
-                Entry.find({
-                    userChecked : false,
-                    marketingManagerChecked : false,
-                    generalManagerChecked : false
-                })
-                .populate('supplierId')
-                .exec()
-                .then(result => {
-                    res.status(200).json({
-                        count : result.length,
-                        entries : result
-                    })
-                }).
-                catch(err => {
-                    res.status(404).json({error : true, msg : err})
-                }) 
-            //give entries uncheked by all users
-            break;
-        case types.MARKETING:
-                Entry.find({
-                    userChecked : true,
-                    marketingManagerChecked : false,
-                    generalManagerChecked : false
-                })
-                .populate('supplierId')
-                .exec()
-                .then(result => {
-                    res.status(200).json({
-                        count : result.length,
-                        entries : result
-                    })
-                }).
-                catch(err => {
-                    res.status(404).json({error : true, msg : err})
-                }) 
-            break;
-        case types.MANAGER:
-                Entry.find({
-                    userChecked : true,
-                    marketingManagerChecked : true,
-                    generalManagerChecked : false
-                })
-                .populate('supplierId')
-                .exec()
-                .then(result => {
-                    res.status(200).json({
-                        count : result.length,
-                        entries : result
-                    })
-                }).
-                catch(err => {
-                    res.status(404).json({error : true, msg : err})
-                })
-        default:
-                Entry.find()
-                .populate('supplierId')
-                .exec()
-                .then(result => {
-                    res.status(200).json({
-                        count : result.length,
-                        entries : result
-                    })
-                }).
-                catch(err => {
-                    res.status(404).json({error : true, msg : err})
-                })
-    }
+    Entry.find()
+    .populate('supplierId')
+    .exec()
+    .then(result => {
+        res.status(200).json({
+            count : result.length,
+            entries : result
+        })
+    }).
+    catch(err => {
+        res.status(404).json({error : true, msg : err})
+    }) 
+
+    // const userType = req.userData.type
+    // switch(userType) {
+    //     case types.USER:
+    //             Entry.find({
+    //                 userChecked : false,
+    //                 marketingManagerChecked : false,
+    //                 generalManagerChecked : false
+    //             })
+    //             .populate('supplierId')
+    //             .exec()
+    //             .then(result => {
+    //                 res.status(200).json({
+    //                     count : result.length,
+    //                     entries : result
+    //                 })
+    //             }).
+    //             catch(err => {
+    //                 res.status(404).json({error : true, msg : err})
+    //             }) 
+    //         //give entries uncheked by all users
+    //         break;
+    //     case types.MARKETING:
+    //             Entry.find({
+    //                 userChecked : true,
+    //                 marketingManagerChecked : false,
+    //                 generalManagerChecked : false
+    //             })
+    //             .populate('supplierId')
+    //             .exec()
+    //             .then(result => {
+    //                 res.status(200).json({
+    //                     count : result.length,
+    //                     entries : result
+    //                 })
+    //             }).
+    //             catch(err => {
+    //                 res.status(404).json({error : true, msg : err})
+    //             }) 
+    //         break;
+    //     case types.MANAGER:
+    //             Entry.find({
+    //                 userChecked : true,
+    //                 marketingManagerChecked : true,
+    //                 generalManagerChecked : false
+    //             })
+    //             .populate('supplierId')
+    //             .exec()
+    //             .then(result => {
+    //                 res.status(200).json({
+    //                     count : result.length,
+    //                     entries : result
+    //                 })
+    //             }).
+    //             catch(err => {
+    //                 res.status(404).json({error : true, msg : err})
+    //             })
+    //     default:
+    //             Entry.find()
+    //             .populate('supplierId')
+    //             .exec()
+    //             .then(result => {
+    //                 res.status(200).json({
+    //                     count : result.length,
+    //                     entries : result
+    //                 })
+    //             }).
+    //             catch(err => {
+    //                 res.status(404).json({error : true, msg : err})
+    //             })
+    // }
 
     // Entry.find()
     //     .populate('supplierId')
