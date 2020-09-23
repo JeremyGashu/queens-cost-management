@@ -129,7 +129,7 @@ exports.entries_by_id = (req, res) => {
 // @Request = POST
 exports.create_entry = (req, res) => {
     const {entries, supplier} = req.body
-    const supplierId = supplier ? new mongoose.Types.ObjectId(supplier) : new mongoose.Types.ObjectId('5f690ce3fadff34ed715ab34')
+    const supplierId = supplier ? new mongoose.Types.ObjectId(supplier) : new mongoose.Types.ObjectId('5f6aebaaee2db900171ee583')
     if(entries) {
         let newEntry = new Entry({
             _id : new mongoose.Types.ObjectId(),
