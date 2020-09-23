@@ -1,6 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const cookieParser = require('cookie-parser')
+const cors = require('cors')
 
 const suppliersRoute = require('./api/routes/supplier')
 const entriesRoute = require('./api/routes/entry')
@@ -22,6 +23,7 @@ db.on('error', err => {
 
 const app = express()
 
+app.use(cors())
 app.use(cookieParser())
 app.use(express.urlencoded({extended : false}))
 app.use(express.json())
