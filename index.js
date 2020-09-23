@@ -1,5 +1,4 @@
 const express = require('express')
-const morgan = require('morgan')
 const mongoose = require('mongoose')
 const cookieParser = require('cookie-parser')
 
@@ -27,7 +26,6 @@ app.use(cookieParser())
 app.use(express.urlencoded({extended : false}))
 app.use(express.json())
 
-app.use(morgan('dev'))
 
 app.use('/suppliers', suppliersRoute)
 app.use('/entries', entriesRoute)
