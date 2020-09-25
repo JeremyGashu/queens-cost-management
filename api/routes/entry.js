@@ -12,11 +12,11 @@ router.post('/', EntriesController.create_entry)
 
 router.delete('/:entry_id',  EntriesController.delete_entry)
 
-router.patch('/user/:entry_id',  EntriesController.entry_checked_by_user)
+router.post('/user/:entry_id',  EntriesController.entry_checked_by_user)
 
-router.patch('/marketing/:entry_id', EntriesController.entry_checked_by_marketing_manager)
+router.post('/marketing/:entry_id', EntriesController.entry_checked_by_marketing_manager)
 
-router.patch('/manager/:entry_id',EntriesController.entry_checked_by_general_manager)
+router.post('/manager/:entry_id',EntriesController.entry_checked_by_general_manager)
 
 router.use(EntriesController.error_handler)
 
