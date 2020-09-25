@@ -142,6 +142,7 @@ exports.entries_by_id = (req, res) => {
 // @Request = POST
 exports.create_entry = (req, res) => {
     const {entries, supplier} = req.body
+    console.log(entries)
     const supplierId = supplier ? new mongoose.Types.ObjectId(supplier) : new mongoose.Types.ObjectId('5f6aebaaee2db900171ee583')
     if(entries) {
         let newEntry = new Entry({
@@ -244,6 +245,28 @@ exports.entry_checked_by_marketing_manager = (req, res) => {
 // @ Success status code = 200
 // @ Faillure Status code = 400, 404
 // @Request = PATCH
+// exports.approve_entry = (req, res) => {
+//     let id = req.params.entry_id
+//     try {
+//         Entry.findById({_id :mongoose.Types.ObjectId(id)}).exec().then(result => {
+//             if(result) {
+//                 if(!result.generalManagerChecked) {
+//                     result.generalManagerChecked = true
+//                     result.save()
+//                     res.status(200).json({msg:'User checked!', result})
+//                 }
+//                 else{
+//                     res.status(200).json({msg:'Already approved!', result})
+//                 }
+//             }
+//             else{
+//                 res.status(400).json({error : true, msg : 'No Entry found with this ID'})
+//             }
+//         }).catch(err => res.status(400).json({error : true, msg : 'Invalid Format Encounterd.'}))
+//     } catch (error) {
+//         res.status(400).json({error : 'No Entry found with this ID'})
+//     }
+// }
 exports.entry_checked_by_general_manager = (req, res) => {
     let id = req.params.entry_id
     try {
