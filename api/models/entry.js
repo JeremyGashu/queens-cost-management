@@ -1,12 +1,14 @@
 const mongoose = require('mongoose')
 
+
+
 const entrySchema = new mongoose.Schema({
 	_id: {
 		type: mongoose.Schema.Types.ObjectId,
 		required: true,
 	},
 	entries: {
-        type : Array
+        type : [Object]
         // default : []
     },
     comments : [{type:mongoose.Schema.Types.ObjectId, ref : 'Comment'}],
@@ -29,6 +31,10 @@ const entrySchema = new mongoose.Schema({
     generalManagerChecked : {
         type : Boolean,
         default : false
+    },
+    imageName : {
+        type : String,
+        default : 'queens_image.jpg'
     }
 })
 

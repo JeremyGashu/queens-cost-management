@@ -150,6 +150,11 @@ exports.create_entry = (req, res) => {
             supplierId : supplierId,
             entries
         })
+        if(req.file) {
+            if(req.file.filename) {
+                newEntry.imageName = req.file.filename
+            }
+        }
         newEntry.save().then(() => {
             res.status(201).json({msg:'Created!',entry : newEntry})
         })

@@ -1,6 +1,33 @@
 const express = require('express')
 const EntriesController = require('../controller/entry')
-const AuthChecker = require('../middlewares/auth_user')
+
+const multer = require('multer')
+
+const storage = multer.diskStorage({
+    destination : (req, file, cb) => {
+        cb(null, './assets/images/uploads')
+    },
+    filename : (req, file, cb) => {
+        cb(null, new Date().toISOString() + file.originalname)
+    }
+})
+
+const fileFilter = (req, file, cb) => {
+    if(file.mimetype == 'image/jpg' || file.mimetype == 'image/jpeg' || file.mimetype == 'image/png') {
+        cb(null, true)
+    }
+    else {
+        cb(null, false)
+    }
+}
+
+const upload = multer({
+    storage,limits : {
+    fileSize : 1024 * 1024 * 6
+    },
+    fileFilter
+
+})
 
 const router = express.Router()
 
@@ -8,7 +35,7 @@ router.get('/', EntriesController.get_all_entries)
 
 router.get('/:entry_id' ,EntriesController.entries_by_id)
 
-router.post('/', EntriesController.create_entry)
+router.post('/', upload.single('entryImage'),EntriesController.create_entry)
 
 router.delete('/:entry_id',  EntriesController.delete_entry)
 
