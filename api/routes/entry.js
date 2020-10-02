@@ -35,7 +35,8 @@ router.get('/', EntriesController.get_all_entries)
 
 router.get('/:entry_id' ,EntriesController.entries_by_id)
 
-router.post('/', upload.single('entryImage'),EntriesController.create_entry)
+router.post('/', EntriesController.create_entry)
+router.post('/image/:entry_id', upload.single('entryImage'), EntriesController.add_entry_image)
 
 router.delete('/:entry_id',  EntriesController.delete_entry)
 

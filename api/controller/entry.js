@@ -164,6 +164,30 @@ exports.create_entry = (req, res) => {
     }
 }
 
+exports.add_entry_image = (req, res) => {
+    //here we will set the image
+    let id = req.params.entry_id
+    try {
+        Entry.findById({_id :mongoose.Types.ObjectId(id)}).exec().then(result => {
+            if(result) {
+                if(req.file) {
+                    if(req.file.filename) {
+                        result.imageName = req.file.filename
+                    result.save()
+                    res.status(200).json({msg:'Image Added!!', result})
+                    }
+                }
+            }
+            else{
+                res.status(400).json({error : true, msg : 'No Entry found with this ID'})
+            }
+        }).catch(err => res.status(400).json({error : true, msg : 'Invalid Format Encounterd.'}))
+    } catch (error) {
+        res.status(400).json({error : 'No Entry found with this ID'})
+    }
+
+}
+
 // @Purpose = Delete single Entry
 // @Previlage = User
 // @Required fields =  entry_id
