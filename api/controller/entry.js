@@ -11,7 +11,7 @@ const types = require('../utils/types')
 // @Request = GET
 exports.get_all_entries = (req, res) => {
 
-    Entry.find().sort({date : -1}.exec())
+    Entry.find().sort({addedOn : -1}.exec())
     .populate('supplierId')
     .exec()
     .then(result => {
