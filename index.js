@@ -10,7 +10,7 @@ const userRoute = require('./api/routes/user')
 let devurl = 'mongodb://localhost/queens_price'
 let deployUrl = "mongodb+srv://jeremy:jeremy123@cluster0.fd5ck.mongodb.net/QUEENS_PRICE_MANAGEMENT?retryWrites=true&w=majority"
 
-mongoose.connect(devurl, {useCreateIndex : true,useNewUrlParser : true, useUnifiedTopology : true})
+mongoose.connect(deployUrl, {useCreateIndex : true,useNewUrlParser : true, useUnifiedTopology : true})
 let db = mongoose.connection
 
 db.once('open', () => {
@@ -29,11 +29,11 @@ app.use('/uploads',express.static('./assets/images/uploads'))
 app.use(express.urlencoded({extended : false}))
 app.use(express.json())
 
-app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-  });
+// app.use(function(req, res, next) {
+//     res.header("Access-Control-Allow-Origin", "*");
+//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//     next();
+//   });
   
 app.use('/suppliers', suppliersRoute)
 app.use('/entries', entriesRoute)
