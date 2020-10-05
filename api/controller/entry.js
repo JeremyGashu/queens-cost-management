@@ -142,12 +142,11 @@ exports.entries_by_id = (req, res) => {
 // @Request = POST
 exports.create_entry = (req, res) => {
     const {entries, supplier} = req.body
-    console.log(entries)
-    const supplierId = supplier ? new mongoose.Types.ObjectId(supplier) : new mongoose.Types.ObjectId('5f6aebaaee2db900171ee583')
-    if(entries) {
+    
+    if(entries && supplier) {
         let newEntry = new Entry({
             _id : new mongoose.Types.ObjectId(),
-            supplierId : supplierId,
+            supplier,
             entries
         })
         if(req.file) {
@@ -160,7 +159,7 @@ exports.create_entry = (req, res) => {
         })
     }
     else {
-        res.status(400).json({error : true, msg : 'entries  Should Be Provided'})
+        res.status(400).json({error : true, msg : 'entries and supplier cannot be blank'})
     }
 }
 

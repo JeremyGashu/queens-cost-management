@@ -12,10 +12,7 @@ const entrySchema = new mongoose.Schema({
         // default : []
     },
     comments : [{type:mongoose.Schema.Types.ObjectId, ref : 'Comment'}],
-	supplierId: {
-		type: mongoose.Schema.Types.ObjectId,
-        ref: 'Supplier',
-	},
+	supplier : {type : String, default : 'Other'},
 	addedOn: {
 		type: mongoose.Schema.Types.Date,
 		default: Date.now(),
