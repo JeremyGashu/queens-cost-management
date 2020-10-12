@@ -1,5 +1,6 @@
 module.exports = {
     USER : 'USER',
     MARKETING : 'MARKETING',
-    MANAGER : 'MANAGER'
+    MANAGER : 'MANAGER',
+    BRANCH : 'BRANCH'
 }
