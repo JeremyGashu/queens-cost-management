@@ -176,6 +176,7 @@ exports.add_entry_image = (req, res) => {
                 //     res.status(200).json({msg:'Image Added!!', result})
                 //     }
                 // }
+                // console.log(req.body.filename)
                 result.imageName = req.body.filename
                 result.save()
                 res.status(200).json({msg:'Image Added!!', result})
@@ -183,7 +184,10 @@ exports.add_entry_image = (req, res) => {
             else{
                 res.status(400).json({error : true, msg : 'No Entry found with this ID'})
             }
-        }).catch(err => res.status(400).json({error : true, msg : 'Invalid Format Encounterd.'}))
+        }).catch(err => {
+            console.log(err);
+            res.status(400).json({error : true, msg : 'Invalid Format Encounterd.'})
+        })
     } catch (error) {
         res.status(400).json({error : 'No Entry found with this ID'})
     }
