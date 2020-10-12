@@ -169,13 +169,16 @@ exports.add_entry_image = (req, res) => {
     try {
         Entry.findById({_id :mongoose.Types.ObjectId(id)}).exec().then(result => {
             if(result) {
-                if(req.file) {
-                    if(req.file.filename) {
-                        result.imageName = req.file.filename
-                    result.save()
-                    res.status(200).json({msg:'Image Added!!', result})
-                    }
-                }
+                // if(req.file) {
+                //     if(req.file.filename) {
+                //         result.imageName = req.file.filename
+                //     result.save()
+                //     res.status(200).json({msg:'Image Added!!', result})
+                //     }
+                // }
+                result.imageName = req.body.filename
+                result.save()
+                res.status(200).json({msg:'Image Added!!', result})
             }
             else{
                 res.status(400).json({error : true, msg : 'No Entry found with this ID'})
